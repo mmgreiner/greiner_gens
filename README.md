@@ -137,6 +137,19 @@ module GreinerGens
 end
 ~~~
 
+Railtie also has to be called from `lib/greiner_gens.rb`:
+
+~~~ruby {highlight=[2]}
+require_relative "greiner_gens/version"
+require_relative "greiner_gens/railtie" if defined?(Rails)
+
+module GreinerGens
+  class Error < StandardError; end
+  # Your code goes here...
+end
+
+~~~
+
 Note that we are using the module structure, which will give you two ruby generators called `greiner:slim` and `greiner:simple_css`. This results in the final folder structure:
 
 ~~~~
