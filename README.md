@@ -76,10 +76,7 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
 
 ### developing generators and templates
 
-It took me some time to understand the concept. Help is available in the [tutorial](https://guides.rubyonrails.org/generators.html#first-contact).
-
-In particular, I was fighting with how to get it running in rails. 
-
+It took me some time to understand the concept. Help is available in the [tutorial](https://guides.rubyonrails.org/generators.html#first-contact). In particular, I was fighting with how to get it running in rails. 
 There are two tasks: code the generators and creating a gem.
 
 #### Develop the generator
@@ -145,7 +142,34 @@ module GreinerGens
 end
 ~~~
 
-Note that we are using the module structure, which will give you two ruby generators called `greiner:slim` and `greiner:simple_css`.
+Note that we are using the module structure, which will give you two ruby generators called `greiner:slim` and `greiner:simple_css`. This results in the final folder structure:
+
+~~~~
+.
+├── Gemfile
+├── Gemfile.lock
+├── README.md
+├── Rakefile
+├── bin
+│   ├── console
+│   └── setup
+├── greiner_gens-0.1.0.gem
+├── greiner_gens.gemspec
+├── lib
+│   ├── generators
+│   │   └── greiner
+│   │       ├── simple_css
+│   │       │   └── simple_css_generator.rb
+│   │       └── slim
+│   │           └── slim_generator.rb
+│   ├── greiner_gens
+│   │   ├── railtie.rb
+│   │   └── version.rb
+│   └── greiner_gens.rb
+└── sig
+    └── greiner_gens.rbs
+~~~~
+
 
 Make sure that all these new files are also in your `git`, since the `gemspec` file uses `git ls-files` the package the files into the gem package.
 
