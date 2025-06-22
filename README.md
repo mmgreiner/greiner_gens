@@ -1,8 +1,10 @@
 # GreinerGens
 
-TODO: Delete this and the text below, and describe your gem
+These are two generators that simplify my rails life. They
+- insert the necessary stylesheets and adopt the `application.html.erb` for [simple.css].
+- add the [slim][slim-rails] template and set the templating engine in `config/application.rb`.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/greiner_gens`. To experiment with that code, run `bin/console` for an interactive prompt.
+
 
 ## Installation
 
@@ -11,25 +13,165 @@ TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_O
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add greiner_gens
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install greiner_gens
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+- generate your rails application as usual with `rails new my-app`
+- change into the rails app `cd my-app`
+- add the gem with `bundle add greiner_gens`
+
+~~~bash
+% bin/rails generate --help
+Usage:
+  bin/rails generate GENERATOR [args] [options]
+
+General options:
+  ...
+
+Please choose a generator below.
+
+Rails:
+  application_record
+  ...
+
+Greiner:
+  greiner:simple_css
+  greiner:slim
+
+Slim:
+  slim:authentication
+...
+~~~
+
+### Use Slim
+
+~~~bash
+% bin/rails generate greiner:slim
+     gemfile  slim-rails
+         run  bundle install from "."
+Bundle complete! 18 Gemfile dependencies, 119 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+1 installed gem you directly depend on is looking for funding.
+  Run `bundle fund` for details
+      insert  config/application.rb
+~~~
+
+### Use [simple.css]
+
+~~~bash
+% bin/rails g greiner:simple_css
+      insert  app/views/layouts/application.html.erb
+        gsub  app/views/layouts/application.html.erb
+~~~
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### developing generators and templates
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+It took me some time to understand the concept. Help is available in the [tutorial](https://guides.rubyonrails.org/generators.html#first-contact).
+
+In particular, I was fighting with how to get it running in rails. 
+
+There are two tasks: code the generators and creating a gem.
+
+#### Develop the generator
+
+Create a dummy rails app and develop the generator in there.
+
+~~~bash
+% rails new qw-app --minimal
+% cd qw-app
+% rails g generator my-gen  
+      create  lib/generators/my_gen
+      create  lib/generators/my_gen/my_gen_generator.rb
+      create  lib/generators/my_gen/USAGE
+      create  lib/generators/my_gen/templates
+      invoke  test_unit
+      create    test/lib/generators/my_gen_generator_test.rb
+% tree lib/generators
+lib/generators
+└── my_gen
+    ├── USAGE
+    ├── my_gen_generator.rb
+    └── templates
+~~~
+
+You start coding in `my_gen_generator.rb` as shown in the [turorial](https://guides.rubyonrails.org/generators.html#creating-generators-with-generators).
+
+#### Write the gem
+
+Now I had to package this into a gem.
+
+~~~bash
+% bundle gem greiner_gens
+% cd greiner_gens
+% tree 
+.
+├── Gemfile
+├── README.md
+├── Rakefile
+├── bin
+│   ├── console
+│   └── setup
+├── lib
+│   ├── greiner_gens
+│   │   └── version.rb
+│   └── greiner_gens.rb
+├── greiner_gens.gemspec
+└── sig
+    └── greiner_gens.rbs
+~~~
+
+The trick here is that we have to tie it into `railstie`. To do this, add the file `railtie.rb` next to `version.rb`:
+
+~~~ruby
+require 'rails/railtie'
+
+module GreinerGens
+  class Railtie < Rails::Railtie
+    generators do
+      require 'generators/greiner/slim/slim_generator'
+      require 'generators/greiner/simple_css/simple_css_generator'
+    end
+  end
+end
+~~~
+
+Note that we are using the module structure, which will give you two ruby generators called `greiner:slim` and `greiner:simple_css`.
+
+Make sure that all these new files are also in your `git`, since the `gemspec` file uses `git ls-files` the package the files into the gem package.
+
+Proceed with:
+
+~~~bash
+% gem build *gemspec
+% gem install *gem
+~~~
+
+If you are unsure where this is installed locally, check:
+
+~~~bash
+% gem env path
+% gem list | my-gem
+% gem info my-gem
+...
+~~~
+
+you should find your gem there.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/greiner_gens.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mmgreiner/greiner_gens.
+
+
+[simple.css]: https://simplecss.org/
+[slim-rails]: https://github.com/slim-template/slim-rails/tree/master
+

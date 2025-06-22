@@ -5,9 +5,12 @@ module Greiner
     desc "Add the simple.css framework and adjusts application.html.erb accordingly"
 
     def configure_simpler
+      # add the additional stylesheet link
       inject_into_file 'app/views/layouts/application.html.erb',
         "\n" + '    <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.min.css" %>', 
-        after: '    <%= stylesheet_link_tag "application" %>'
+        after: /^.+stylesheet_link_tag.+$/
+
+      # replace the simple yield with header, navigation, main and footer
       gsub_file 'app/views/layouts/application.html.erb',
         '    <%= yield %>',
         <<~BODY.indent(4)
