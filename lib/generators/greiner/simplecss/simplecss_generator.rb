@@ -1,14 +1,26 @@
 module Greiner
-  class SimpleCssGenerator < Rails::Generators::Base
+  class SimplessGenerator < Rails::Generators::Base
     source_root File.expand_path("templates", __dir__)
 
     desc "Add the simple.css framework and adjusts application.html.erb accordingly"
 
-    def configure_simpler
+    def configure_simplecss
+      style = 
+        <<~STYLE.indent(4)
+
+          <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.min.css" %>
+          <style>
+            :root {
+              --reading-width: min(45rem, 90%);
+            }
+            body {
+              grid-template-columns: 0fr 98% 0fr;
+            }
+          </style>
+        STYLE
+
       # add the additional stylesheet link
-      inject_into_file 'app/views/layouts/application.html.erb',
-        "\n" + '    <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.min.css" %>', 
-        after: /^.+stylesheet_link_tag.+$/
+      inject_into_file 'app/views/layouts/application.html.erb', style, after: /^.+stylesheet_link_tag.+$/
 
       # replace the simple yield with header, navigation, main and footer
       gsub_file 'app/views/layouts/application.html.erb',

@@ -11,20 +11,15 @@ These are two generators that simplify my rails life. They
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add greiner_gens
+bundle add greiner_gens --github mmgreiner/greiner_gens
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-```bash
-gem install greiner_gens
-```
 
 ## Usage
 
 - generate your rails application as usual with `rails new my-app`
 - change into the rails app `cd my-app`
-- add the gem with `bundle add greiner_gens`
+- add the gem with `bundle add greiner_gens --github mmgreiner/greiner_gens`
 
 ~~~bash
 % bin/rails generate --help
