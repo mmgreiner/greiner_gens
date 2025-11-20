@@ -1,5 +1,5 @@
 module Greiner
-  class SimplessGenerator < Rails::Generators::Base
+  class SimplecssGenerator < Rails::Generators::Base
     source_root File.expand_path("templates", __dir__)
 
     desc "Add the simple.css framework and adjusts application.html.erb accordingly"
