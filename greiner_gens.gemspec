@@ -14,15 +14,15 @@ Gem::Specification.new do |spec|
     - slimmer adds the slim-rails gem and adjusts configuration accordingly
     - simple_css sets application.html.erb up to use the simple.css templating framework 
   DESC
-  spec.homepage = "https://github.com/mmgreiner"
+  spec.homepage = "https://github.com/mmgreiner/greiner_gens"
   spec.required_ruby_version = ">= 3.1.0"
   spec.licenses = "MIT"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/mmgreiner"
-  spec.metadata["changelog_uri"] = "https://github.com/mmgreiner"
+  spec.metadata["source_code_uri"] = "https://github.com/mmgreiner/greiner_gens"
+  spec.metadata["changelog_uri"] = "https://github.com/mmgreiner/greiner_gens"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -46,5 +46,5 @@ Gem::Specification.new do |spec|
   
   spec.add_development_dependency "railties", ">= 6.0"
   spec.add_development_dependency "minitest", "~> 5.0"
-  
+
 end
