@@ -7,7 +7,7 @@ class SimplecssGeneratorTest < Rails::Generators::TestCase
   setup :prepare_destination
 
   test "generator modifies layouts/application.rb" do
-    run_generator ["greiner:simple_css"]
+    run_generator ["greiner:simplecss"]
     assert_file "app/views/layouts/application.html.erb" do |content|
       assert_match(/grid-template-columns/, content)
       assert_match(/simple\.min\.css/, content)
