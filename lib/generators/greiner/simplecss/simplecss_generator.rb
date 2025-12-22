@@ -14,7 +14,7 @@ module Greiner
               --reading-width: min(45rem, 90%);
             }
             body {
-              grid-template-columns: 0fr 98% 0fr;
+              grid-template-columns: 1fr 98% 1fr;
             }
           </style>
         STYLE

@@ -5,7 +5,7 @@ module Greiner
     desc "Add slim-rails gem and configure Rails to use Slim"
 
     def add_slim_gem
-      gem 'slim-rails', group: :development
+      gem 'slim-rails'
       run 'bundle install'
     end
 
