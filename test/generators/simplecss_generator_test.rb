@@ -17,7 +17,7 @@ class SimplecssGeneratorTest < Rails::Generators::TestCase
   end
 
   test 'generator modifies layouts/application.rb with option --luzern' do
-    run_generator ["--luzern"]   # , luzern: true
+    run_generator ['--luzern']
     logo_file = 'Logo_Kanton_Luzern_RGB.png'
     assert_file 'app/views/layouts/application.html.erb' do |content|
       assert_match(/grid-template-columns/, content)

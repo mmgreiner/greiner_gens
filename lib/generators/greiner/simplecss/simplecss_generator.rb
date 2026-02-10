@@ -64,7 +64,7 @@ module Greiner
                     <%= yield %>
                   </main>
                   <footer>
-                    Copyright &copy; <my company>
+                    Copyright &copy; <%= Date.today.year %> <my company>
                   </footer>
                 BODY
       return unless options[:luzern]
