@@ -63,7 +63,7 @@ bin/rails g greiner:simplecss
 ~~~
 
 There is an option which changes the color scheme for night to the colors of the Kanton Luzern, and adds
-the logo of the Kanton Luzern.
+the logo of the Kanton Luzern, according to the [Corporate Design des Kantons Luzern](https://intranet.lu.ch/corporate/staatskanzlei/SitePages/Corporate-Design.aspx) (available only after login).
 
 ~~~bash
 bin/rails g greiner:simplecss --luzern
