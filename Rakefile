@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "rake"
-require "bundler/gem_tasks"
-require "standard/rake"
-require "rake/testtask"
+require 'rake'
+require 'bundler/gem_tasks'
+require 'standard/rake'
+require 'rake/testtask'
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'

@@ -1,7 +1,7 @@
 # GreinerGens
 
 These are two generators that simplify my rails life. They
-- insert the necessary stylesheets and adopt the `application.html.erb` for [simple.css].
+- insert the necessary stylesheets and adopt the `application.html.erb` for [simplecss].
 - add the [slim][slim-rails] template and set the templating engine in `config/application.rb`.
 
 
@@ -47,20 +47,28 @@ Slim:
 ### Use Slim
 
 ~~~bash
-% bin/rails generate greiner:slim
+bin/rails generate greiner:slim
      gemfile  slim-rails
          run  bundle install from "."
 Bundle complete! 18 Gemfile dependencies, 119 gems now installed.
       insert  config/application.rb
 ~~~
 
-### Use [simple.css]
+### Use [simplecss]
 
 ~~~bash
-% bin/rails g greiner:simple_css
+bin/rails g greiner:simplecss
       insert  app/views/layouts/application.html.erb
         gsub  app/views/layouts/application.html.erb
 ~~~
+
+There is an option which changes the color scheme for night to the colors of the Kanton Luzern, and adds
+the logo of the Kanton Luzern.
+
+~~~bash
+bin/rails g greiner:simplecss --luzern
+~~~
+
 
 ## Development
 
@@ -145,7 +153,7 @@ end
 
 ~~~
 
-Note that we are using the module structure, which will give you two ruby generators called `greiner:slim` and `greiner:simple_css`. This results in the final folder structure:
+Note that we are using the module structure, which will give you two ruby generators called `greiner:slim` and `greiner:simplecss`. This results in the final folder structure:
 
 ~~~~
 .
@@ -161,8 +169,8 @@ Note that we are using the module structure, which will give you two ruby genera
 ├── lib
 │   ├── generators
 │   │   └── greiner
-│   │       ├── simple_css
-│   │       │   └── simple_css_generator.rb
+│   │       ├── simplecss
+│   │       │   └── simplecss_generator.rb
 │   │       └── slim
 │   │           └── slim_generator.rb
 │   ├── greiner_gens
@@ -199,6 +207,6 @@ you should find your gem there.
 Bug reports and pull requests are welcome on GitHub at https://github.com/mmgreiner/greiner_gens.
 
 
-[simple.css]: https://simplecss.org/
+[simplecss]: https://simplecss.org/
 [slim-rails]: https://github.com/slim-template/slim-rails/tree/master
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    greiner_gens (0.1.0)
+    greiner_gens (0.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -60,7 +60,11 @@ GEM
     loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    mini_portile2 (2.8.9)
     minitest (5.26.2)
+    nokogiri (1.18.10)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.18.10-arm64-darwin)
       racc (~> 1.4)
     parallel (1.27.0)
@@ -146,13 +150,14 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
+    unicode-emoji (4.2.0)
     uri (1.1.1)
     useragent (0.16.11)
     zeitwerk (2.7.3)
 
 PLATFORMS
   arm64-darwin-24
+  arm64-darwin-25
 
 DEPENDENCIES
   greiner_gens!

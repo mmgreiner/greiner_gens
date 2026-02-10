@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "greiner_gens/version"
-require_relative "greiner_gens/railtie" if defined?(Rails)
+require_relative 'greiner_gens/version'
+require_relative 'greiner_gens/railtie' if defined?(Rails)
 
 module GreinerGens
   class Error < StandardError; end

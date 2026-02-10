@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Greiner
+  # Rails generator to change everything to use slim templating
   class SlimGenerator < Rails::Generators::Base
     source_root File.expand_path('templates', __dir__)
 
-    desc "Add slim-rails gem and configure Rails to use Slim"
+    desc 'Add slim-rails gem and configure Rails to use Slim'
 
     def add_slim_gem
       gem 'slim-rails'
@@ -16,7 +19,7 @@ module Greiner
         config.generators.template_engine = :slim
 
       SLIM
-      inject_into_file 'config/application.rb', lines + "\n", before: "  end"
+      inject_into_file 'config/application.rb', "#{lines}\n", before: '  end'
     end
   end
 end
