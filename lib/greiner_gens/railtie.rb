@@ -7,6 +7,7 @@ module GreinerGens
     generators do
       require 'generators/greiner/slim/slim_generator'
       require 'generators/greiner/simplecss/simplecss_generator'
+      require 'generators/greiner/openapi/openapi_generator'
     end
   end
 end

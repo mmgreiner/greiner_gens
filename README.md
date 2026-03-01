@@ -195,8 +195,8 @@ If you are unsure where this is installed locally, check:
 
 ~~~bash
 % gem env path
-% gem list | my-gem
-% gem info my-gem
+% gem list | grep greiner_gens
+% gem info greiner_gens
 ...
 ~~~
 
@@ -205,7 +205,6 @@ you should find your gem there.
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/mmgreiner/greiner_gens.
-
 
 [simplecss]: https://simplecss.org/
 [slim-rails]: https://github.com/slim-template/slim-rails/tree/master
