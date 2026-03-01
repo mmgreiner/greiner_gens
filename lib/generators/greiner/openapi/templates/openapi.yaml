@@ -8,12 +8,12 @@ info:
     Operational and metadata endpoints for the Example Cantonal Service.
     Designed in accordance with Swiss public sector API-REST guidelines.
   contact:
-    name: Amt für Informatik – Kanton Example
-    email: api-support@kt-example.ch
-    url: https://www.kt-example.ch
+    name: Dienststelle XYZ
+    email: todo@lu.ch
+    url: https://todo.ki.lu.ch
   license:
-    name: Swiss Government Open Use License
-    url: https://www.admin.ch/opc/en/classified-compilation/20111927/index.html
+    name: Creative Commons Zero v1.0 Universal
+    url: https://github.com/swiss/opensource-guidelines/blob/main/LICENSE
 
 servers:
   - url: https://api.kt-example.ch
