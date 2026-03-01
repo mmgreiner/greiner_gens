@@ -1,0 +1,177 @@
+# openapi: 3.1.0
+openapi: 3.0.3
+
+info:
+  title: Example Cantonal Service API
+  version: 1.0.0
+  description: >
+    Operational and metadata endpoints for the Example Cantonal Service.
+    Designed in accordance with Swiss public sector API-REST guidelines.
+  contact:
+    name: Amt für Informatik – Kanton Example
+    email: api-support@kt-example.ch
+    url: https://www.kt-example.ch
+  license:
+    name: Swiss Government Open Use License
+    url: https://www.admin.ch/opc/en/classified-compilation/20111927/index.html
+
+servers:
+  - url: https://api.kt-example.ch
+    description: Production
+  - url: https://api.int.kt-example.ch
+    description: Integration
+
+tags:
+  - name: Health
+    description: Service operational health endpoints
+  - name: Metadata
+    description: Service metadata endpoint
+
+paths:
+
+  /live:
+    get:
+      tags: [Health]
+      summary: Liveness probe
+      description: >
+        Indicates that the service process is running.
+        Intended for Kubernetes livenessProbe.
+      operationId: getLiveness
+      responses:
+        "200":
+          description: Service is alive
+
+  /ready:
+    get:
+      tags: [Health]
+      summary: Readiness probe
+      description: >
+        Indicates that the service is ready to receive traffic.
+        Intended for Kubernetes readinessProbe.
+      operationId: getReadiness
+      responses:
+        "200":
+          description: Service is ready
+        "503":
+          description: Service is not ready
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+
+  /health:
+    get:
+      tags: [Health]
+      summary: Aggregated health status
+      description: >
+        Returns aggregated health information including dependency status.
+        Intended for monitoring purposes.
+      operationId: getHealth
+      responses:
+        "200":
+          description: Service healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+        "503":
+          description: Service unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /info:
+    get:
+      tags: [Metadata]
+      summary: Service metadata
+      description: >
+        Returns static service metadata including name, version,
+        description, homepage and repository.
+      operationId: getServiceInfo
+      responses:
+        "200":
+          description: Service metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceInfo"
+
+components:
+
+  schemas:
+
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [UP, DOWN]
+          description: Overall service health status
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of health evaluation
+        version:
+          type: string
+          description: Service semantic version
+        dependencies:
+          type: object
+          description: Dependency health states
+          additionalProperties:
+            type: string
+
+    ServiceInfo:
+      type: object
+      required:
+        - name
+        - version
+        - description
+        - homepage
+        - repository
+      properties:
+        name:
+          type: string
+          description: Stable service identifier
+          example: building-permits-service
+        version:
+          type: string
+          description: Semantic version of the service
+          example: 1.0.0
+        description:
+          type: string
+          description: Short description of the service
+          example: API for managing building permit applications
+        homepage:
+          type: string
+          format: uri
+          description: Public or internal project homepage
+          example: https://www.kt-example.ch/building-permits
+        repository:
+          type: string
+          format: uri
+          description: Source code repository URL
+          example: https://git.kt-example.ch/projects/BPS/repos/api
+        environment:
+          type: string
+          enum: [test, development, production]
+          description: Deployment environment (e.g. production, staging)
+          example: production
+
+    Problem:
+      type: object
+      description: Problem Details (RFC compliant error structure)
+      required: [type, title, status]
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string

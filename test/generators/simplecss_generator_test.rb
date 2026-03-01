@@ -5,7 +5,7 @@ require_relative '../../lib/generators/greiner/simplecss/simplecss_generator'
 
 class SimplecssGeneratorTest < Rails::Generators::TestCase
   tests Greiner::SimplecssGenerator
-  destination Rails.root.join('generators')
+  destination Rails.root.join('generators-simplecss')
   setup :prepare_destination
 
   test 'generator modifies layouts/application.rb' do

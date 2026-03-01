@@ -5,7 +5,7 @@ require_relative '../../lib/generators/greiner/slim/slim_generator'
 
 class SlimGeneratorTest < Rails::Generators::TestCase
   tests Greiner::SlimGenerator
-  destination Rails.root.join('tmp/generators')
+  destination Rails.root.join('generators-slim')
   setup :prepare_destination
 
   test 'generator modifies config/application.rb' do
