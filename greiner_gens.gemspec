@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['mmgreiner']
   spec.email = ['mmgreiner@bluewin.ch']
 
-  spec.summary = 'Provides simple generators for rails applications: slim templating, simple.css framework, and openapi.'
+  spec.summary = 'Provides simple generators for rails applications: slim templating, simple.css framework, openapi, and Entra-ID.'
   spec.description = <<~DESC
     Provides three generators for a rails project: slimmer adds slim to a"
     - slimmer adds the slim-rails gem and adjusts configuration accordingly
@@ -48,4 +48,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'railties', '>= 6.0'
+  spec.add_development_dependency "activerecord", ">= 6.1"
 end

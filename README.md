@@ -11,7 +11,7 @@ These are two generators that simplify my rails life. They
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add greiner_gens --github mmgreiner/greiner_gens
+bundle add greiner_gens --github mmgreiner/greiner_gens --group development
 ```
 
 
@@ -201,6 +201,31 @@ If you are unsure where this is installed locally, check:
 ~~~
 
 you should find your gem there.
+
+## Testing
+
+A good way to test it is to create a dummy rails application
+
+```bash
+cd ..
+rails new test_greiner_gens
+tree
+├── greiner_gens
+│   ├── greiner_gens-0.1.1.gem
+│   ├── greiner_gens-0.1.2.gem
+│   ├── greiner_gens-0.1.3.gem
+│   ├── greiner_gens.gemspec
+│   ├── ...
+├── test_greiner_gens
+cd test_greiner_gens
+bundle add greiner_gens --path ../greiner_gens --group development
+rails generate -h | grep greiner
+  greiner:entra
+  greiner:openapi
+  greiner:simplecss
+  greiner:slim
+bin/rails generate greiner:slim
+```
 
 ## Contributing
 

@@ -36,7 +36,7 @@ class OpenapiGeneratorTest < Rails::Generators::TestCase
   end
 
   test 'generator adds version.rb' do
-    assert_file 'config/version.rb'  
+    assert_file 'config/version.rb'
   end
 
   test 'generator adds two controlelrs' do

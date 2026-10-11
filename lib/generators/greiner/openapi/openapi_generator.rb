@@ -22,7 +22,7 @@ module Greiner
     def configure_version
       template "version.rb", "config/version.rb", skip: true
     end
-    
+
     def configure_routes
       routes = <<~ROUTES.indent(2)
         # openapi
