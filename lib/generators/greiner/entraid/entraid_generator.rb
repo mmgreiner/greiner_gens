@@ -37,11 +37,8 @@ module Greiner
     end
 
     def add_routes
-      routes = <<~ROUTES
-        get "/auth/:provider/callback", to: "omniauth_callbacks#create"
-        get "/auth/failure", to: "omniauth_callbacks#failure"
-      ROUTES
-      inject_into_file "config/routes.rb", routes, before: /^end/
+      route 'get "/auth/:provider/callback", to: "omniauth_callbacks#create"'
+      route 'get "/auth/failure", to: "omniauth_callbacks#failure"'
     end
 
     def change_dotenv
@@ -52,11 +49,50 @@ module Greiner
         # not really used
         ENTRA_CLIENT_SECRET_ID=
       ENVS
-      create_file ".env", "# ENTRA_ID variables\n", skip: true
-      append_to_file ".env", envs
+
+      env_path = File.join(destination_root, ".env")
+
+      if behavior == :revoke
+        # remove only our block; keep the user's .env
+        gsub_file ".env", envs, "" if File.exist?(env_path)
+      else
+        create_file ".env", "", skip: true
+        append_to_file ".env", envs unless File.exist?(env_path) && File.read(env_path).include?("ENTRA_TENANT_ID=")
+      end
+    end
+
+    VIEW_BASE = "app/views/sessions/new.html"
+
+    def add_login_button
+      ext = %w[erb slim].find { |e| File.exist?(File.join(destination_root, "#{VIEW_BASE}.#{e}")) }
+
+      unless ext
+        say_status :skip, "no #{VIEW_BASE}.erb or .slim found", :yellow
+        return
+      end
+
+      path = "#{VIEW_BASE}.#{ext}"
+      return if File.read(File.join(destination_root, path)).include?("auth/entra_id")
+
+      snippet = (ext == "slim") ? slim_button : erb_button
+      append_to_file path, snippet
     end
 
     private
+
+    def erb_button
+      <<~ERB
+
+        <%= button_to "Sign in with Microsoft", "/auth/entra_id", method: :post %>
+      ERB
+    end
+
+    def slim_button
+      <<~SLIM
+
+        = button_to "Sign in with Microsoft", "/auth/entra_id", method: :post
+      SLIM
+    end
 
     def migration_version
       "[#{ActiveRecord::Migration.current_version}]"
