@@ -10,10 +10,11 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Provides simple generators for rails applications: slim templating, simple.css framework, and openapi.'
   spec.description = <<~DESC
-    Provides two generators for a rails project: slimmer adds slim to a"
+    Provides three generators for a rails project: slimmer adds slim to a"
     - slimmer adds the slim-rails gem and adjusts configuration accordingly
     - simple_css sets application.html.erb up to use the simple.css templating framework#{' '}
     - openapi adds a standard openapi calls for health check
+    - destroy adds tasks to destroy all mail relevant files
   DESC
   spec.homepage = 'https://github.com/mmgreiner/greiner_gens'
   spec.required_ruby_version = '>= 3.1.0'
