@@ -36,7 +36,9 @@ Rails:
   ...
 
 Greiner:
-  greiner:simple_css
+  greiner:entraid
+  greiner:openapi
+  greiner:simplecss
   greiner:slim
 
 Slim:
@@ -69,6 +71,26 @@ the logo of the Kanton Luzern, according to the [Corporate Design des Kantons Lu
 bin/rails g greiner:simplecss --luzern
 ~~~
 
+### Use EntraID
+
+This requires that `bin/rail generate authentication` has been run before.
+It adds some additional files to work with EntraID, the authentication mechanism of Microsoft Azure.
+
+```bash
+% bin/rails g greiner:entraid
+     gemfile  omniauth
+     gemfile  omniauth_openid_connect
+     gemfile  omniauth-rails_csrf_protection
+         run  bundle update from "."
+      create  config/initializers/entra.rb
+      create  db/migrate/20261011221605_add_entra_to_users.rb
+       route  get "/auth/:provider/callback", to: "omniauth_callbacks#create"
+       route  get "/auth/failure", to: "omniauth_callbacks#failure"
+        skip  .env
+      append  app/views/sessions/new.html.slim
+```
+
+You then have to apply a migration with `bin/rails db:migrate`.
 
 ## Development
 
