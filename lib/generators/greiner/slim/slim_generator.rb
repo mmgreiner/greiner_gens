@@ -8,8 +8,8 @@ module Greiner
     desc 'Add slim-rails gem and configure Rails to use Slim'
 
     def add_slim_gem
-      gem 'slim-rails'
-      run 'bundle install'
+      gem "slim-rails"
+      bundle_command("install") unless options[:skip_bundle]
     end
 
     def configure_slim
