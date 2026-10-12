@@ -54,8 +54,8 @@ class OpenapiGeneratorTest < Rails::Generators::TestCase
 
   def prepare_fake_rails_app
     # Create directory structure
-    FileUtils.mkdir_p(File.join(destination_root, 'config'))
-    FileUtils.mkdir_p(File.join(destination_root, 'app', 'controllers'))
+    FileUtils.mkdir_p(File.join(destination_root, "config", "environments"))
+    FileUtils.mkdir_p(File.join(destination_root, "app", "controllers"))
 
     # Create fake Gemfile
     File.write(
@@ -99,5 +99,17 @@ class OpenapiGeneratorTest < Rails::Generators::TestCase
         end
       APP
     )
+
+    # Create env files
+    %w[development test].each do |e|
+      File.write(
+        File.join(destination_root, "config", "environments", "#{e}.rb"),
+        <<~BODY
+          Rails.application.configure do
+            # environment
+          end
+        BODY
+      )
+    end
   end
 end

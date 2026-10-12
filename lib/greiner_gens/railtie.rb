@@ -8,6 +8,7 @@ module GreinerGens
       require 'generators/greiner/slim/slim_generator'
       require 'generators/greiner/simplecss/simplecss_generator'
       require 'generators/greiner/openapi/openapi_generator'
+      require "generators/greiner/entraid/entraid_generator"
     end
   end
 end

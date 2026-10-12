@@ -5,11 +5,13 @@ module Greiner
   class SlimGenerator < Rails::Generators::Base
     source_root File.expand_path('templates', __dir__)
 
+    class_option :skip_bundle, type: :boolean, default: false
+
     desc 'Add slim-rails gem and configure Rails to use Slim'
 
     def add_slim_gem
       gem "slim-rails"
-      bundle_command("install") unless options[:skip_bundle]
+      run "bundle install" unless options[:skip_bundle]
     end
 
     def configure_slim

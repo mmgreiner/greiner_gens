@@ -8,6 +8,8 @@ module Greiner
   class EntraidGenerator < Rails::Generators::Base
     include Rails::Generators::Migration
 
+    class_option :skip_bundle, type: :boolean, default: false
+
     # Required: tells Rails how to generate the timestamp/number
     def self.next_migration_number(dirname)
       ActiveRecord::Generators::Base.next_migration_number(dirname)
@@ -21,7 +23,7 @@ module Greiner
       gem "omniauth"
       gem "omniauth_openid_connect"
       gem "omniauth-rails_csrf_protection"
-      bundle_command("install") unless options[:skip_bundle]
+      run "bundle install" unless options[:skip_bundle]
     end
 
     def add_middleware
