@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InfoController < ActionController::API
   def show
     render json: {
@@ -35,5 +37,4 @@ class InfoController < ActionController::API
   def repository
     ENV.fetch("SERVICE_REPOSITORY", "https://git.kt-example.ch/projects/example/repos/api")
   end
-
 end

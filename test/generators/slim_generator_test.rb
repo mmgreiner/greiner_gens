@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-require_relative '../../lib/generators/greiner/slim/slim_generator'
+require "test_helper"
+require_relative "../../lib/generators/greiner/slim/slim_generator"
 
 class SlimGeneratorTest < Rails::Generators::TestCase
   tests Greiner::SlimGenerator
-  destination Rails.root.join('generators-slim')
+  destination Rails.root.join("generators-slim")
   setup :prepare_destination
 
-  test 'generator modifies config/application.rb' do
+  test "generator modifies config/application.rb" do
     run_generator
-    assert_file 'config/application.rb' do |content|
+    assert_file "config/application.rb" do |content|
       assert_match(/config.generators.template_engine = :slim/, content)
     end
   end
@@ -22,11 +22,11 @@ class SlimGeneratorTest < Rails::Generators::TestCase
 
   def prepare_fake_rails_app
     # Create directory structure
-    FileUtils.mkdir_p(File.join(destination_root, 'config'))
+    FileUtils.mkdir_p(File.join(destination_root, "config"))
 
     # Create fake Gemfile
     File.write(
-      File.join(destination_root, 'Gemfile'),
+      File.join(destination_root, "Gemfile"),
       <<~GEMFILE
         # Fake gemfile
         source "https://rubygems.org"
@@ -35,7 +35,7 @@ class SlimGeneratorTest < Rails::Generators::TestCase
     )
     # Create fake config/application.rb
     File.write(
-      File.join(destination_root, 'config/application.rb'),
+      File.join(destination_root, "config/application.rb"),
       <<~APP
         module Bla
           class Application < Rails::Application

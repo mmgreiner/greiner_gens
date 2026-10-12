@@ -17,7 +17,7 @@ module Greiner
       # require "action_mailbox/engine"
       config_file = "config/application.rb"
       gsub config_file, /^\s*require.+?mail.*$/, ""
-      inject_into_file config_file, after: /config\.autoload_lib.*\n/,
+      inject_into_file config_file, after: /config\.autoload_lib.*\n/, 
         "    config.action_mailer.perform_deliveries = false\n"
     end
 

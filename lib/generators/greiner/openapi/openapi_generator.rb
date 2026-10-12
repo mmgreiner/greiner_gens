@@ -3,13 +3,13 @@
 module Greiner
   # Rails generator to add simplecss css framework to a rails application
   class OpenapiGenerator < Rails::Generators::Base
-    source_root File.expand_path('templates', __dir__)
+    source_root File.expand_path("templates", __dir__)
 
-    desc 'Add a standard OpenAPI spec and middleware to a rails application'
+    desc "Add a standard OpenAPI spec and middleware to a rails application"
 
     def add_committee_gem
-      gem 'committee', groups: [:development, :test]
-      run 'bundle install'
+      gem "committee", groups: %i[development test]
+      run "bundle install"
     end
 
     def configure_openapi

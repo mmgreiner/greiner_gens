@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-require_relative '../../lib/generators/greiner/simplecss/simplecss_generator'
+require "test_helper"
+require_relative "../../lib/generators/greiner/simplecss/simplecss_generator"
 
 class SimplecssGeneratorTest < Rails::Generators::TestCase
   tests Greiner::SimplecssGenerator
-  destination Rails.root.join('generators-simplecss')
+  destination Rails.root.join("generators-simplecss")
   setup :prepare_destination
 
-  test 'generator modifies layouts/application.rb' do
+  test "generator modifies layouts/application.rb" do
     run_generator # ['greiner:simplecss']
-    assert_file 'app/views/layouts/application.html.erb' do |content|
+    assert_file "app/views/layouts/application.html.erb" do |content|
       assert_match(/grid-template-columns/, content)
       assert_match(/simple\.min\.css/, content)
     end
   end
 
-  test 'generator modifies layouts/application.rb with option --luzern' do
-    run_generator ['--luzern']
-    logo_file = 'Logo_Kanton_Luzern_RGB.png'
-    assert_file 'app/views/layouts/application.html.erb' do |content|
+  test "generator modifies layouts/application.rb with option --luzern" do
+    run_generator ["--luzern"]
+    logo_file = "Logo_Kanton_Luzern_RGB.png"
+    assert_file "app/views/layouts/application.html.erb" do |content|
       assert_match(/grid-template-columns/, content)
       assert_match(/simple\.min\.css/, content)
       assert_match(/@media \(prefers-color-scheme: dark\)/, content)
@@ -35,13 +35,13 @@ class SimplecssGeneratorTest < Rails::Generators::TestCase
 
   def prepare_fake_rails_app
     # Create directory structure
-    FileUtils.mkdir_p(File.join(destination_root, 'app/views/layouts'))
-    FileUtils.mkdir_p(File.join(destination_root, 'config'))
-    FileUtils.mkdir_p(File.join(destination_root, 'public'))
+    FileUtils.mkdir_p(File.join(destination_root, "app/views/layouts"))
+    FileUtils.mkdir_p(File.join(destination_root, "config"))
+    FileUtils.mkdir_p(File.join(destination_root, "public"))
 
     # Create fake application.html.erb
     File.write(
-      File.join(destination_root, 'app/views/layouts/application.html.erb'),
+      File.join(destination_root, "app/views/layouts/application.html.erb"),
       <<~HTML
         <!DOCTYPE html>
         <html>

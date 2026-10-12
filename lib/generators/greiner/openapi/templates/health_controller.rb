@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HealthController < ActionController::API
   def live
     head :ok
@@ -34,7 +36,7 @@ class HealthController < ActionController::API
   def database_ready?
     # ActiveRecord::Base.connection.active?
     ActiveRecord::Base.connection.execute("SELECT 1").any?
-  rescue StandardError
+  rescue
     false
   end
 
@@ -42,7 +44,7 @@ class HealthController < ActionController::API
     dependencies = {
       database: database_ready? ? "UP" : "DOWN"
     }
-    overall_status = dependencies.values.all? { |v| v == "UP" } ? "UP" : "DOWN"
+    overall_status = dependencies.values.all?("UP") ? "UP" : "DOWN"
 
     {
       status: overall_status,
@@ -54,13 +56,13 @@ class HealthController < ActionController::API
 
   def render_problem(status:, title:, detail:)
     render json: {
-      type: "about:blank",
-      title: title,
+             type: "about:blank",
+             title: title,
+             status: status,
+             detail: detail,
+             instance: request.path
+           },
       status: status,
-      detail: detail,
-      instance: request.path
-    },
-    status: status,
-    content_type: "application/problem+json"
+      content_type: "application/problem+json"
   end
 end

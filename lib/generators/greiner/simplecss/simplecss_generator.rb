@@ -3,10 +3,10 @@
 module Greiner
   # Rails generator to add simplecss css framework to a rails application
   class SimplecssGenerator < Rails::Generators::Base
-    source_root File.expand_path('templates', __dir__)
-    class_option :luzern, type: :boolean, default: false, desc: 'Use Kanton Luzern theme and logo'
+    source_root File.expand_path("templates", __dir__)
+    class_option :luzern, type: :boolean, default: false, desc: "Use Kanton Luzern theme and logo"
 
-    desc 'Add the simplecss framework and adjusts application.html.erb accordingly'
+    desc "Add the simplecss framework and adjusts application.html.erb accordingly"
 
     def configure_simplecss
       style =
@@ -45,31 +45,31 @@ module Greiner
       LUZERN
 
       # add the additional stylesheet link
-      app_file = 'app/views/layouts/application.html.erb'
+      app_file = "app/views/layouts/application.html.erb"
       inject_into_file app_file, style, after: /^.+stylesheet_link_tag.+$/
       inject_into_file app_file, luzern, after: %r{</style>} if options[:luzern]
 
       # replace the simple yield with header, navigation, main and footer
       gsub_file app_file,
-                '    <%= yield %>',
-                <<~BODY.indent(4)
-                  <header>
-                    <nav>
-                      <ul>
-                        <li><%= link_to :home, root_path %>
-                      </ul>
-                    </nav>
-                  </header>
-                  <main>
-                    <%= yield %>
-                  </main>
-                  <footer>
-                    Copyright &copy; <%= Date.today.year %> <my company>
-                  </footer>
-                BODY
+        "    <%= yield %>",
+        <<~BODY.indent(4)
+          <header>
+            <nav>
+              <ul>
+                <li><%= link_to :home, root_path %>
+              </ul>
+            </nav>
+          </header>
+          <main>
+            <%= yield %>
+          </main>
+          <footer>
+            Copyright &copy; <%= Date.today.year %> <my company>
+          </footer>
+        BODY
       return unless options[:luzern]
 
-      logo_file = 'Logo_Kanton_Luzern_RGB.png'
+      logo_file = "Logo_Kanton_Luzern_RGB.png"
       li = "\n          <li><img src=\"/#{logo_file}\" alt=\"Luzern Logo\" class=\"logo\" ></li>"
       inject_into_file app_file, li, after: /<ul>/
       copy_file logo_file, "public/#{logo_file}"

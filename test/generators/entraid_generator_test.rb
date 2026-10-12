@@ -8,7 +8,6 @@ class EntraidGeneratorTest < Rails::Generators::TestCase
   destination File.expand_path("../../tmp/generators-entraid", __dir__)
   setup :prepare_destination
   setup :prepare_fake_rails_app
-  puts "🤖 destination: #{destination_root}"
 
   test "generator adds config/entra.rb" do
     run_generator
@@ -36,11 +35,11 @@ class EntraidGeneratorTest < Rails::Generators::TestCase
 
   def prepare_fake_rails_app
     # Create directory structure
-    FileUtils.mkdir_p(File.join(destination_root, 'config', 'initializers'))
+    FileUtils.mkdir_p(File.join(destination_root, "config", "initializers"))
 
     # Create fake Gemfile
     File.write(
-      File.join(destination_root, 'Gemfile'),
+      File.join(destination_root, "Gemfile"),
       <<~GEMFILE
         # Fake gemfile
         source "https://rubygems.org"
@@ -49,7 +48,7 @@ class EntraidGeneratorTest < Rails::Generators::TestCase
 
     # Create fake config/application.rb
     File.write(
-      File.join(destination_root, 'config/application.rb'),
+      File.join(destination_root, "config/application.rb"),
       <<~APP
         module Bla
           class Application < Rails::Application
