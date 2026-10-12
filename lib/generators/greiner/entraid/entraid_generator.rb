@@ -21,11 +21,11 @@ module Greiner
       gem "omniauth"
       gem "omniauth_openid_connect"
       gem "omniauth-rails_csrf_protection"
-      run "bundle update"
+      bundle_command("install") unless options[:skip_bundle]
     end
 
     def add_middleware
-      copy_file "entra.rb", "config/initializers/entra.rb"
+      copy_file "entra.rb.tt", "config/initializers/entra.rb"
     end
 
     def create_migration_file
