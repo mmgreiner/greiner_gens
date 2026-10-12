@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
     - slimmer adds the slim-rails gem and adjusts configuration accordingly
     - simple_css sets application.html.erb up to use the simple.css templating framework#{" "}
     - openapi adds a standard openapi calls for health check
-    - destroy adds tasks to destroy all mail relevant files
+    - remove mail adds tasks to remove all mail relevant files
   DESC
   spec.homepage = "https://github.com/mmgreiner/greiner_gens"
   spec.required_ruby_version = ">= 3.1.0"
