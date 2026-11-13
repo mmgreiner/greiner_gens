@@ -20,9 +20,8 @@ module Greiner
     desc "Add EntraID Sign-on to a Rails 8 app with authentication"
 
     def add_omniauth_gems
-      gem "omniauth"
-      gem "omniauth_openid_connect"
-      gem "omniauth-rails_csrf_protection"
+      gem "omniauth-entra-id", "~> 3.1"
+      # gem "omniauth-rails_csrf_protection", "~> 2.0"
       run "bundle install" unless options[:skip_bundle]
     end
 
@@ -38,9 +37,13 @@ module Greiner
       )
     end
 
+    def add_controller
+      copy_file "omniauth_sessions_controller.rb.tt", "app/controllers/omniauth_sessions_controller.rb"
+    end
+
     def add_routes
-      route 'get "/auth/:provider/callback", to: "omniauth_callbacks#create"'
-      route 'get "/auth/failure", to: "omniauth_callbacks#failure"'
+      route 'get "/auth/:provider/callback", to: "omniauth_sessions#create"'
+      route 'get "/auth/failure", to: redirect("/session/new")'
     end
 
     def change_dotenv

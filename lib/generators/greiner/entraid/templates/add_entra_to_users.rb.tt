@@ -1,5 +1,7 @@
 class AddEntraToUsers < ActiveRecord::Migration<%= migration_version %>
   def change
-    add_column :users, :entra_id, :string
+    add_column :users, :provider, :string
+    add_column :users, :uid, :string
+    add_index :users, [:provider, :uid], unique: true
   end
 end

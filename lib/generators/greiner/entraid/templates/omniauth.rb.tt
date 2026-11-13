@@ -1,0 +1,19 @@
+require "dotenv/load"
+
+# Setup: 
+#  * Go to https://portal.azure.com/auth/login/
+#  * -> App Registration
+#  * -> New Registration
+#    * Application (client) ID gives ENTRA_CLIENT_ID
+#    * Directory (tenant) ID gives ENTRA_TENANT_ID
+#    * Client Credential, the Value gives ENTRA_CLIENT_SECRET, the Secret-ID is not really needed
+#  * -> Redirect URI Configuration, typically Web and http://localhost:3000/auth/entra_id/callback
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :entra_id,
+    client_id: ENV.fetch("ENTRA_CLIENT_ID", "dummy"),
+    client_secret: ENV.fetch("ENTRA_CLIENT_SECRET", "dummy"),
+    tenant_id: ENV.fetch("ENTRA_TENANT_ID", "dummy")
+end
+
+OmniAuth.config.allowed_request_methods = [:post]
+
