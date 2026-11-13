@@ -11,7 +11,7 @@ namespace :docker do
 
   desc "Scan the Docker image with Trivy (IMAGE=name:tag,SEVERITY=CRITICAL)"
   task trivy: :build do
-    severity = ENF.fetch("SEVERITY", "CRITICAL")
+    severity = ENV.fetch("SEVERITY", "CRITICAL")
     abort "trivy not found " unless system("which trivy", out: File::NULL, err: File::NULL)
     cmd = ["trivy", "image", "--exit-code", "1", "--severity", severity, image]
     system(*cmd) || abort("Trivy found issues or failed")
