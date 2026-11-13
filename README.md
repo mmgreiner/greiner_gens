@@ -249,6 +249,19 @@ rails generate -h | grep greiner
 bin/rails generate greiner:slim
 ```
 
+## Releasing
+
+```
+% bump patch
+[master c94017d] v0.2.2
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+0.2.2
+% gem_push=no bundle exec rake release
+greiner_gens 0.2.2 built to pkg/greiner_gens-0.2.2.gem.
+Tagged v0.2.2.
+Pushed git commits and release tag.
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/mmgreiner/greiner_gens.
