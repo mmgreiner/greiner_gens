@@ -10,12 +10,14 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Provides simple generators for rails applications: slim templating, simple.css framework, openapi, and Entra-ID."
   spec.description = <<~DESC
-    Provides three generators for a rails project: slimmer adds slim to a"
+    Provides the following generators for a rails project: slimmer adds slim to a"
     - slimmer adds the slim-rails gem and adjusts configuration accordingly
     - simple_css sets application.html.erb up to use the simple.css templating framework#{" "}
     - openapi adds a standard openapi calls for health check
     - remove mail adds tasks to remove all mail relevant files
-    - 
+    
+    To add it to your Gemfile, use: 
+      bundle add greiner_gens --github mmgreiner/greiner_gens --group development
   DESC
   spec.homepage = "https://github.com/mmgreiner/greiner_gens"
   spec.required_ruby_version = ">= 3.1.0"
