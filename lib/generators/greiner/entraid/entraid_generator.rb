@@ -26,7 +26,7 @@ module Greiner
     end
 
     def add_middleware
-      copy_file "entra.rb.tt", "config/initializers/entra.rb"
+      copy_file "omniauth.rb.tt", "config/initializers/omniauth.rb"
     end
 
     def create_migration_file
