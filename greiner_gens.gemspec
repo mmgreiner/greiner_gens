@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
     
     To add it to your Gemfile, use: 
       bundle add greiner_gens --github mmgreiner/greiner_gens --group development
+
+    It also adds two rake/tasks to build a docker image, and to check it with trivy.
   DESC
   spec.homepage = "https://github.com/mmgreiner/greiner_gens"
   spec.required_ruby_version = ">= 3.1.0"
