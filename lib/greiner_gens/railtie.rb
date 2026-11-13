@@ -10,5 +10,8 @@ module GreinerGens
       require "generators/greiner/openapi/openapi_generator"
       require "generators/greiner/entraid/entraid_generator"
     end
+    rake_tasks do
+      load File.expand_path("../tasks/docker.rake", __dir__)
+    end
   end
 end
